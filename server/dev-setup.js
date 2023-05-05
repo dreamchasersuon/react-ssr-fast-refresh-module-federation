@@ -21,8 +21,10 @@ const initDevSetup = app => {
 
     app.use(
         webpackDevMiddleware(compiler, {
+            publicPath: '/',
+            writeToDisk: true,
             serverSideRender: true,
-            publicPath: devBrowserConfig.output.publicPath
+            stats: 'minimal',
         })
     );
 

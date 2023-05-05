@@ -2,8 +2,9 @@ import express from 'express';
 import 'regenerator-runtime/runtime';
 import 'source-map-support/register';
 import 'babel-polyfill';
-import routesMatchMiddleware from './router-match';
 import initDevSetup from './dev-setup';
+import path from 'path';
+import RouterMatch from "./router-match";
 
 const {APP_ENV, NODE_ENV} = process.env;
 
@@ -19,7 +20,11 @@ if (NODE_ENV === 'development') {
 app.use('/static', express.static('public'));
 app.use('/static', express.static('.static'));
 
-app.get('*', routesMatchMiddleware);
+app.use(express.static(path.resolve(__dirname, '../dist')));
+
+app.get('*', (req, res) => {
+    RouterMatch(req, res);
+});
 
 app.use((err, req, res) => {
     res.status(200).send('Something broken!');
