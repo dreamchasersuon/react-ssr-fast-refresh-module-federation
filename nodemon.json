@@ -1,0 +1,5 @@
+{
+  "verbose": false,
+  "watch": ["server", "babel.config.js", "./webpack.config"],
+  "exec": "yarn build:dev && node --inspect --max-old-space-size=5096 ./.compiled-server/server.js"
+}

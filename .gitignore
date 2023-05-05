@@ -1,0 +1,10 @@
+.DS_Store
+.vscode
+.idea
+.monitor
+.compiled-server
+.static
+compiled
+public
+node_modules/
+manifest.json
