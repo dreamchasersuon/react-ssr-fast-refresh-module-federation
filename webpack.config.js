@@ -85,13 +85,13 @@ const createConfig = ({env, ...rest}) =>
         plugins: env.browser ? [
             new CaseSensitivePathsPlugin(),
             new webpack.EnvironmentPlugin(environments),
-            mfConfig,
+            // mfConfig,
             new ExternalTemplateRemotesPlugin(),
             new webpack.HotModuleReplacementPlugin(),
             new ReactRefreshWebpackPlugin({
                 forceEnable: true,
                 overlay: false,
-                exclude: [/node_modules/, /bootstrap\.js$/]
+                exclude: [/node_modules/],
             }),
             new WebpackManifestPlugin({
                 fileName: '../manifest.json',
@@ -103,7 +103,7 @@ const createConfig = ({env, ...rest}) =>
             })
         ] : [new CaseSensitivePathsPlugin(),
             new webpack.EnvironmentPlugin(environments),
-            mfConfig,
+            // mfConfig,
             new ExternalTemplateRemotesPlugin()],
         devtool: 'eval-source-map',
         cache: process.env.NODE_ENV === 'development' ? {type: 'filesystem'} : false,
