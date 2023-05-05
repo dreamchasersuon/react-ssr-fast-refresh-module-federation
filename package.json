@@ -1,0 +1,41 @@
+{
+  "name": "untitled1",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development APP_ENV=dev CDN_URL=/static TZ=Europe/Moscow nodemon",
+    "build:dev": "node --max-old-space-size=5096 ./node_modules/.bin/webpack --color --progress profile --config ./webpack.config.js"
+  },
+  "engines": {
+    "node": ">=14.17.0"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "react": "^16.14.0",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.12.8",
+    "@babel/core": "^7.12.9",
+    "@babel/preset-env": "^7.12.7",
+    "@babel/preset-react": "^7.12.7",
+    "@babel/runtime": "^7.12.5",
+    "@gatsbyjs/webpack-hot-middleware": "^2.25.3",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.10",
+    "babel-loader": "^8.2.1",
+    "babel-plugin-dynamic-import-node": "^2.3.0",
+    "babel-plugin-import": "^1.13.0",
+    "babel-polyfill": "^6.26.0",
+    "cross-env": "^7.0.3",
+    "nodemon": "^2.0.7",
+    "path": "^0.12.7",
+    "react-refresh": "^0.14.0",
+    "webpack": "^5.30.0",
+    "webpack-cli": "^4.6.0",
+    "webpack-dev-middleware": "^4.1.0",
+    "webpack-manifest-plugin": "^3.1.0",
+    "webpack-plugin-serve": "^1.6.0"
+  }
+}
