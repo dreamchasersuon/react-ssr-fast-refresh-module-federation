@@ -86,9 +86,9 @@ const createConfig = ({env, ...rest}) =>
             new ExternalTemplateRemotesPlugin(),
             new webpack.HotModuleReplacementPlugin(),
             new ReactRefreshWebpackPlugin({
-                forceEnable: true,
-                overlay: false,
-                exclude: [/node_modules/],
+                overlay: {
+                    sockIntegration: 'whm',
+                },
             }),
             new WebpackManifestPlugin({
                 fileName: '../manifest.json',
