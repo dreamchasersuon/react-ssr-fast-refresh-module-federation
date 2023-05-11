@@ -1,7 +1,7 @@
 import path from 'path';
 import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
-import webpackHotMiddleware from '@gatsbyjs/webpack-hot-middleware';
+import webpackHotMiddleware from 'webpack-hot-middleware';
 
 const initDevSetup = app => {
     const webpackConfig = require('./../webpack.config');

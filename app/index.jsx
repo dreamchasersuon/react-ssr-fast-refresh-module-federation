@@ -1,12 +1,3 @@
-import React from 'react';
-import {hydrate} from 'react-dom';
-import {App} from './app';
-
-
-const APP_NODE = document.querySelector(`#publisher-client`);
-
-const renderApp = () => {
-    hydrate(<App />, APP_NODE);
-};
-
-renderApp();
+window.builderUrl = 'http://localhost:3005/remoteEntry.js';
+// This import syntax is required for use with Webpack 5 Module Federation
+import('./bootstrap');

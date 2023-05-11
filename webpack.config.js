@@ -2,7 +2,6 @@ const path = require("path");
 const webpack = require('webpack');
 const {WebpackManifestPlugin} = require('webpack-manifest-plugin');
 const {ModuleFederationPlugin} = require('webpack').container;
-const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const deps = require('../../package.json').dependencies;
 const ExternalTemplateRemotesPlugin = require('external-remotes-plugin');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
@@ -14,7 +13,6 @@ const environments = {
     measureIsDisabled: true,
     browser: false
 };
-const APP_ENTRY = 'app';
 
 const mfConfig = new ModuleFederationPlugin({
     name: 'main',
@@ -83,9 +81,8 @@ const createConfig = ({env, ...rest}) =>
             ]
         },
         plugins: env.browser ? [
-            new CaseSensitivePathsPlugin(),
             new webpack.EnvironmentPlugin(environments),
-            // mfConfig,
+            mfConfig,
             new ExternalTemplateRemotesPlugin(),
             new webpack.HotModuleReplacementPlugin(),
             new ReactRefreshWebpackPlugin({
@@ -101,9 +98,9 @@ const createConfig = ({env, ...rest}) =>
             new webpack.ProvidePlugin({
                 process: 'process/browser'
             })
-        ] : [new CaseSensitivePathsPlugin(),
+        ] : [
             new webpack.EnvironmentPlugin(environments),
-            // mfConfig,
+            mfConfig,
             new ExternalTemplateRemotesPlugin()],
         devtool: 'eval-source-map',
         cache: process.env.NODE_ENV === 'development' ? {type: 'filesystem'} : false,
@@ -119,16 +116,6 @@ const createConfig = ({env, ...rest}) =>
     })
 
 const browserConfig = env => {
-    const entry = {[APP_ENTRY]: ['./index.jsx']};
-
-    if (!env.production && env.browser) {
-        entry[APP_ENTRY] = [
-            '@gatsbyjs/webpack-hot-middleware/client',
-            'react-refresh/runtime',
-            './index.jsx'
-        ];
-    }
-
     const optimization = {
         moduleIds: 'named',
         chunkIds: 'named',
@@ -143,7 +130,13 @@ const browserConfig = env => {
 
     return createConfig({
         name: 'client',
-        entry,
+        entry: {
+            app: [
+                'webpack-hot-middleware/client',
+                'react-refresh/runtime',
+                './index.jsx'
+            ]
+        },
         target: 'web',
         output: {
             path: path.resolve(process.cwd(), '.static'),
