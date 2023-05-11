@@ -31,8 +31,8 @@ const initDevSetup = app => {
     app.use(
         webpackHotMiddleware(compiler, {
             log: console.log, // eslint-disable-line no-console
-            path: '/__webpack_hmr_client', // Update the path to match the expected value
-            heartbeat: 10 * 1000,
+            path: '/__webpack_hmr',
+            heartbeat: 10 * 1000
         })
     );
 };

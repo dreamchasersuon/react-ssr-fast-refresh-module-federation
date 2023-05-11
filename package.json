@@ -40,6 +40,7 @@
     "webpack-dev-middleware": "^4.1.0",
     "webpack-hot-middleware": "^2.25.3",
     "webpack-manifest-plugin": "^3.1.0",
+    "webpack-node-externals": "^3.0.0",
     "webpack-plugin-serve": "^1.6.0"
   }
 }

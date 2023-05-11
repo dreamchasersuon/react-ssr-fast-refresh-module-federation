@@ -5,7 +5,7 @@ const {ModuleFederationPlugin} = require('webpack').container;
 const deps = require('../../package.json').dependencies;
 const ExternalTemplateRemotesPlugin = require('external-remotes-plugin');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
-const externals = require('./externals');
+const nodeExternals = require("webpack-node-externals")
 
 const environments = {
     production: false,
@@ -163,7 +163,7 @@ const serverConfig = env =>
         optimization: {
             minimize: false
         },
-        externals,
+        externals: [nodeExternals()],
         env
     });
 
